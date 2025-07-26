@@ -90,7 +90,7 @@ public class Keyboard2View extends View
 
   public void refresh_navigation_bar(Context context)
   {
-    if (VERSION.SDK_INT < 21)
+    if (VERSION.SDK_INT > 30)
       return;
     // The intermediate Window is a [Dialog].
     Window w = getParentWindow(context);
@@ -310,8 +310,8 @@ public class Keyboard2View extends View
   @Override
   public WindowInsets onApplyWindowInsets(WindowInsets wi)
   {
-    // LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS is set in [Keyboard2#updateSoftInputWindowLayoutParams] for SDK_INT >= 35.
-    if (VERSION.SDK_INT < 35)
+    // LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS is set in [Keyboard2#updateSoftInputWindowLayoutParams] for SDK_INT >= 30.
+    if (VERSION.SDK_INT < 30)
       return wi;
     int insets_types =
       WindowInsets.Type.systemBars()

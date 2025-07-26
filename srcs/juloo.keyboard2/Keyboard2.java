@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.inputmethodservice.InputMethodService;
 import android.os.Build.VERSION;
 import android.os.Handler;
@@ -307,15 +308,16 @@ public class Keyboard2 extends InputMethodService
 
   private void updateSoftInputWindowLayoutParams() {
     final Window window = getWindow().getWindow();
-    // On API >= 35, Keyboard2View behaves as edge-to-edge
-    // APIs 30 to 34 have visual artifact when edge-to-edge is enabled
-    if (VERSION.SDK_INT >= 35)
+    // On API >= 30, Keyboard2View behaves as edge-to-edge
+    if (VERSION.SDK_INT >= 30)
     {
       WindowManager.LayoutParams wattrs = window.getAttributes();
       wattrs.layoutInDisplayCutoutMode =
         WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS;
       // Allow to draw behind system bars
       wattrs.setFitInsetsTypes(0);
+      window.setStatusBarColor(Color.TRANSPARENT);
+      window.setNavigationBarColor(Color.TRANSPARENT);
       window.setDecorFitsSystemWindows(false);
     }
     updateLayoutHeightOf(window, ViewGroup.LayoutParams.MATCH_PARENT);
